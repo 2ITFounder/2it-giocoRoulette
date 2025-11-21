@@ -32,45 +32,57 @@ const DrumSection: React.FC<DrumSectionProps> = ({
         <label style={{ fontSize: 14, color: "#e5e7eb" }}>
           Camere:
           <input
-            type="number"
-            min={1}
-            max={24}
-            value={chambers}
-            onChange={(e) => onChangeChambers(Number(e.target.value) || 1)}
-            style={{
-              width: 70,
-              padding: "6px 8px",
-              borderRadius: 999,
-              border: "1px solid #4b5563",
-              backgroundColor: "#020617",
-              color: "#f9fafb",
-              outline: "none",
-              fontSize: 14,
+             type="number"
+             inputMode="numeric"
+             step={1}
+             min={1}
+             max={24}
+             value={chambers}
+             onChange={(e) => {
+                const raw = e.target.value;
+                const num = raw === "" ? 0 : Number(raw);
+                onChangeChambers(num);
+             }}
+             style={{
+               width: 70,
+               padding: "6px 8px",
+               borderRadius: 999,
+               border: "1px solid #4b5563",
+               backgroundColor: "#020617",
+               color: "#f9fafb",
+               outline: "none",
+               fontSize: 14,
               marginLeft: 6,
-            }}
-          />
+             }}
+        />
         </label>
 
         <label style={{ fontSize: 14, color: "#e5e7eb" }}>
           Proiettili:
           <input
             type="number"
+            inputMode="numeric"
+            step={1}
             min={1}
-            max={chambers}
+            max={chambers || 24}
             value={bullets}
-            onChange={(e) => onChangeBullets(Number(e.target.value) || 1)}
-            style={{
-              width: 70,
-              padding: "6px 8px",
-              borderRadius: 999,
-              border: "1px solid #4b5563",
-              backgroundColor: "#020617",
-              color: "#f9fafb",
-              outline: "none",
-              fontSize: 14,
-              marginLeft: 6,
+            onChange={(e) => {
+                const raw = e.target.value;
+                const num = raw === "" ? 0 : Number(raw);
+                onChangeBullets(num);
             }}
-          />
+            style={{
+                width: 70,
+                padding: "6px 8px",
+                borderRadius: 999,
+                border: "1px solid #4b5563",
+                backgroundColor: "#020617",
+                color: "#f9fafb",
+                outline: "none",
+                fontSize: 14,
+                marginLeft: 6,
+            }}
+        />
         </label>
       </div>
 
