@@ -1,4 +1,4 @@
-import { Chamber } from "@/types/game";
+import { Chamber } from "../types/game";
 
 export function generateChambers(chambers: number, bullets: number): Chamber[] {
   const totalChambers = Math.max(1, Number.isFinite(chambers) ? chambers : 6);
