@@ -11,6 +11,45 @@ const DrumSection: React.FC<DrumSectionProps> = ({
   onChangeChambers,
   onChangeBullets,
 }) => {
+  const incrementChambers = () => {
+    onChangeChambers(Math.min(24, chambers + 1));
+  };
+
+  const decrementChambers = () => {
+    onChangeChambers(Math.max(1, chambers - 1));
+  };
+
+  const incrementBullets = () => {
+    onChangeBullets(Math.min(chambers, bullets + 1));
+  };
+
+  const decrementBullets = () => {
+    onChangeBullets(Math.max(1, bullets - 1));
+  };
+
+  const btnStyle: React.CSSProperties = {
+    width: 32,
+    height: 32,
+    borderRadius: 999,
+    border: "1px solid #4b5563",
+    backgroundColor: "#1e293b",
+    color: "#f9fafb",
+    fontSize: 20,
+    fontWeight: 600,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+  };
+
+  const valueStyle: React.CSSProperties = {
+    minWidth: 40,
+    textAlign: "center",
+    fontSize: 16,
+    color: "#f9fafb",
+    fontWeight: 600,
+  };
+
   return (
     <section
       style={{
@@ -21,74 +60,47 @@ const DrumSection: React.FC<DrumSectionProps> = ({
     >
       <h2 style={{ fontSize: 18, marginBottom: 8 }}>2. Tamburo</h2>
 
+      {/* CAMERE */}
       <div
         style={{
           display: "flex",
-          gap: 16,
-          flexWrap: "wrap",
           alignItems: "center",
+          gap: 12,
+          marginBottom: 12,
         }}
       >
-        <label style={{ fontSize: 14, color: "#e5e7eb" }}>
+        <span style={{ fontSize: 14, color: "#e5e7eb", width: 80 }}>
           Camere:
-          <input
-             type="number"
-             inputMode="numeric"
-             step={1}
-             min={1}
-             max={24}
-             value={chambers}
-             onChange={(e) => {
-                const raw = e.target.value;
-                const num = raw === "" ? 0 : Number(raw);
-                onChangeChambers(num);
-             }}
-             style={{
-               width: 70,
-               padding: "6px 8px",
-               borderRadius: 999,
-               border: "1px solid #4b5563",
-               backgroundColor: "#020617",
-               color: "#f9fafb",
-               outline: "none",
-               fontSize: 14,
-              marginLeft: 6,
-             }}
-        />
-        </label>
+        </span>
 
-        <label style={{ fontSize: 14, color: "#e5e7eb" }}>
+        <button style={btnStyle} onClick={decrementChambers}>−</button>
+
+        <span style={valueStyle}>{chambers}</span>
+
+        <button style={btnStyle} onClick={incrementChambers}>+</button>
+      </div>
+
+      {/* PROIETTILI */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+        }}
+      >
+        <span style={{ fontSize: 14, color: "#e5e7eb", width: 80 }}>
           Proiettili:
-          <input
-            type="number"
-            inputMode="numeric"
-            step={1}
-            min={1}
-            max={chambers || 24}
-            value={bullets}
-            onChange={(e) => {
-                const raw = e.target.value;
-                const num = raw === "" ? 0 : Number(raw);
-                onChangeBullets(num);
-            }}
-            style={{
-                width: 70,
-                padding: "6px 8px",
-                borderRadius: 999,
-                border: "1px solid #4b5563",
-                backgroundColor: "#020617",
-                color: "#f9fafb",
-                outline: "none",
-                fontSize: 14,
-                marginLeft: 6,
-            }}
-        />
-        </label>
+        </span>
+
+        <button style={btnStyle} onClick={decrementBullets}>−</button>
+
+        <span style={valueStyle}>{bullets}</span>
+
+        <button style={btnStyle} onClick={incrementBullets}>+</button>
       </div>
 
       <p style={{ fontSize: 12, color: "#9ca3af", marginTop: 6 }}>
-        Alcuni proiettili saranno speciali: doppio shot, buddy shot, all-in,
-        shield…
+        Alcuni proiettili saranno speciali: doppio shot, buddy shot, all-in, shield…
       </p>
     </section>
   );
